@@ -46,14 +46,28 @@ export class LuoxuClient {
   async search(opts: {
     group_id: number
     query: string
+    sender: number
+    start: number
+    end: number
   }): Promise<SearchResult> {
-    const { group_id, query } = opts
+    const { group_id, query, sender, start, end} = opts
 
+    var params:any = {
+      g: group_id,
+      q: query
+    }
+    if(sender) {
+      params["sender"] = sender
+    }
+    if(start) {
+      params["start"] = start
+    }
+    if(end) {
+      params["end"] = end
+    }
+    
     const { data } = await this.requester.get(`/search`, {
-      params: {
-        g: group_id,
-        q: query,
-      },
+      params: params
     })
 
     return data

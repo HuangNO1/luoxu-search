@@ -72,7 +72,7 @@ export default defineComponent({
 
       const query = {
         g: selected_group_id.value.toString(),
-        q: state.query,
+        q: state.query
       }
 
       router.push({ path: "/search", query })
